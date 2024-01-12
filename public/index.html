@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Location Input</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #343d4b;
+            color: #fff;
+            text-align: center;
+            margin-top: 50px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        h1 {
+            color: #61dafb;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        input[type="text"] {
+            width: 200px;
+            padding: 8px;
+            background-color: #4d5768;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button,
+        .button {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #61dafb;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .button:hover,
+        button:hover {
+            background-color: #41a0e6;
+        }
+
+        #geolocationSection,
+        #manualSection {
+            background-color: #4d5768;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #manualSection {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            input[type="text"] {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Your Location </h1>
+
+    <label>
+        <input type="radio" name="locationType" id="geolocation">
+        Use Geolocation
+    </label>
+
+    <label>
+        <input type="radio" name="locationType" id="manual">
+        Enter City or State
+    </label>
+
+    <div id="geolocationSection">
+        <p>Click here to get the Weather</p>
+        <input type="submit" value="Get Location" class="button" onclick="getLoc()">
+    </div>
+
+    <div id="manualSection">
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" placeholder="Enter city">
+
+        <label for="state">State:</label>
+        <input type="text" id="state" name="state" placeholder="Enter state">
+
+    </div>
+
+    <script>
+
+        function getLoc() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(async (pos) => {
+                    var lat = pos.coords.latitude;
+                    var long = pos.coords.longitude;
+                    console.log(lat);
+                    console.log(long);
+
+                    const data = {
+                        latitude: lat,
+                        longitude: long,
+                    }
+                    const option = {
+
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        redirect: "follow",
+                        body: JSON.stringify(data),
+
+                    }
+
+                    try {
+
+                        const resp = await fetch("/loc", option);
+
+                        if (resp.ok) {
+                            console.log('Request was successful');
+                        } if (resp.redirected) {
+                            console.log('Redirected to:', resp.url);
+                            window.location.href = resp.url;
+                        } else {
+                            console.log('Request failed with status:', resp.status);
+                        }
+
+                    } catch (error) {
+                        console.error('Error handling fetch response:', error);
+                    }
+
+                })
+            } else {
+
+            }
+        }
+
+
+
+
+
+    </script>
+</body>
+
+</html>
