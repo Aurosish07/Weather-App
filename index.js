@@ -57,7 +57,8 @@ app.get("/loc", async (req, res) => {
   const name = response.data.name;
   const sunset = new Date(response.data.sys.sunset * 1000);  
   const sunrise = new Date(response.data.sys.sunrise * 1000);
-  
+  const icon = response.data.weather[0].icon;
+  const lastChar = icon.charAt(icon.length - 1);
   
   const set = sunset.toLocaleTimeString("en-US");
   const rise = sunrise.toLocaleTimeString("en-US");
@@ -84,6 +85,7 @@ app.get("/loc", async (req, res) => {
   console.log(fullDate);
   console.log(rise);
   console.log(set);
+  console.log(lastChar)
   // console.log(temp1);                                 
   // console.log(humidity1);                  
   // console.log(desc1);             
@@ -93,7 +95,7 @@ app.get("/loc", async (req, res) => {
   //for ejs :- {temp1:temp1  , humi1:humidity1 , desc1:desc1 , press1:pressure1 , wind:wind }       
 
 
-  res.render("index.ejs", { Full: fullDate, week: week , city:name , coun:country , temp1:temp , humi1:humidity , desc1:desc , press1:pressure , wind:wind , visiable:visibility , set:set , rise:rise });
+  res.render("index.ejs", { Full: fullDate, week: week , city:name , coun:country , temp1:temp , humi1:humidity , desc1:desc , press1:pressure , wind:wind , visiable:visibility , set:set , rise:rise , last:lastChar  });
 });
 
 
