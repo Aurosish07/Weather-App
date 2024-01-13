@@ -53,11 +53,12 @@
 		height: 400px;
 	}
 
+
 	.weather-side {
 		position: relative;
 		height: 100%;
 		border-radius: 25px;
-		/* background-image: url("https://images.unsplash.com/photo-1559963110-71b394e7494d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80"); */
+		background-image: url("https://images.unsplash.com/photo-1559963110-71b394e7494d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80");
 		width: 300px;
 		-webkit-box-shadow: 0 0 20px -10px rgba(0, 0, 0, 0.2);
 		box-shadow: 0 0 20px -10px rgba(0, 0, 0, 0.2);
@@ -71,15 +72,21 @@
 		float: left;
 	}
 
-	.weather-side.night {
-		background-image: url("https://unsplash.com/photos/rocky-shore-under-full-moon-a_hPPrncGlQ?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash");
-		color: #fff;
-	}
-
 	.weather-side:hover {
 		-webkit-transform: scale(1.1) perspective(1500px) rotateY(10deg);
 		transform: scale(1.1) perspective(1500px) rotateY(10deg);
 	}
+
+
+	/* .night {
+		background-image: url("https://unsplash.com/photos/rocky-shore-under-full-moon-a_hPPrncGlQ?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash");
+		color: #fff;
+	}
+
+	.night:hover {
+		transform: scale(0.95);
+	} */
+
 
 	.weather-gradient {
 		position: absolute;
@@ -120,7 +127,7 @@
 
 	.weather-container {
 		position: absolute;
-		bottom: 25px;
+		bottom: 60px;
 		left: 25px;
 	}
 
@@ -328,6 +335,132 @@
 		font-size: 0.8rem;
 
 	}
+
+	.swipe-button {
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		display: none;
+		justify-content: center;
+		padding: 20px 0;
+		background: rgba(0, 0, 0, 0.5);
+		/* semi-transparent black background */
+		border-radius: 25px;
+
+	}
+
+
+
+	.swipe-button button {
+		padding: 10px 20px;
+		font-size: 16px;
+		cursor: pointer;
+		background: #2196F3;
+		/* blue background */
+		color: #fff;
+		/* white text */
+		border: none;
+		/* remove border */
+		border-radius: 5px;
+		/* rounded corners */
+		transition: background 0.3s;
+		/* smooth background color transition */
+		display: flex;
+		/* align the icon and the text */
+		align-items: center;
+		/* center the icon and the text vertically */
+	}
+
+	.swipe-button button:hover {
+		background: #0d8bf2;
+		/* slightly darker blue background when hovered over */
+	}
+
+	.swipe-button button i {
+		margin-right: 5px;
+		/* add some space between the icon and the text */
+	}
+
+
+	@media screen and (max-width:604px) {
+
+		.weather-side {
+			position: relative;
+			height: 100%;
+			border-radius: 25px;
+			background-image: url("https://images.unsplash.com/photo-1559963110-71b394e7494d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80");
+			width: 300px;
+			-webkit-box-shadow: 0 0 20px -10px rgba(0, 0, 0, 0.2);
+			box-shadow: 0 0 20px -10px rgba(0, 0, 0, 0.2);
+			-webkit-transition: -webkit-transform 300ms ease;
+			transition: -webkit-transform 300ms ease;
+			-o-transition: transform 300ms ease;
+			transition: transform 300ms ease;
+			transition: transform 300ms ease, -webkit-transform 300ms ease;
+			-webkit-transform: translateZ(0) scale(1.02) perspective(1000px);
+			transform: translateZ(0) scale(1.02) perspective(1000px);
+			float: none
+		}
+
+		.weather-side:hover {
+			-webkit-transform: scale(1.1) perspective(1500px) rotateY(10deg);
+			transform: scale(1.1) perspective(1500px) rotateY(360deg);
+		}
+
+
+		.info-side {
+			visibility: hidden;
+			margin-top: 1rem;
+		}
+
+
+		.swipe-button {
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			padding: 10px 0;
+			background: rgba(0, 0, 0, 0.5);
+			/* semi-transparent black background */
+			border-radius: 25px;
+
+		}
+
+
+
+		.swipe-button button {
+			padding: 10px 20px;
+			font-size: 16px;
+			cursor: pointer;
+			background: #2196F3;
+			/* blue background */
+			color: #fff;
+			/* white text */
+			border: none;
+			/* remove border */
+			border-radius: 5px;
+			/* rounded corners */
+			transition: background 0.3s;
+			/* smooth background color transition */
+			display: flex;
+			/* align the icon and the text */
+			align-items: center;
+			/* center the icon and the text vertically */
+		}
+
+		.swipe-button button:hover {
+			background: #0d8bf2;
+			/* slightly darker blue background when hovered over */
+		}
+
+		.swipe-button button i {
+			margin-right: 5px;
+			/* add some space between the icon and the text */
+
+		}
+
+	}
 </style>
 
 
@@ -367,96 +500,110 @@
 
 
 
+			<%last %>
 
-			<div class="container">
-				<div class="weather-side">
-					<div class="weather-gradient">
-						<div class="date-container">
-							<h2 class="date-dayname">
-								<%= week %>
-							</h2>
-							<span class="date-day">
-								<%=Full%>
-							</span>
-							<i class="fa-solid fa-location-dot"></i>
-							<span class="location">
-								<%=city%> , <%=coun%>
-							</span>
+				<div class="container">
+					<div class="weather-side">
+						<div class="weather-gradient">
+							<div class="date-container">
+								<h2 class="date-dayname">
+									<%= week %>
+								</h2>
+								<span class="date-day">
+									<%=Full%>
+								</span>
+								<i class="fa-solid fa-location-dot"></i>
+								<span class="location">
+									<%=city%> , <%=coun%>
+								</span>
+							</div>
+							<div class="weather-container">
+								<img width="70" height="70" src="<%= map[desc1] %>" alt="sun--v1" id="" />
+								<br>
+								
+								<h3 class="weather-desc">
+									<%=desc1%>
+								</h3>
+								<br>
+								
+								<h1 class="weather-temp">
+									<%=temp1%>°C
+								</h1>
+							</div>
 						</div>
-						<div class="weather-container">
-							<img width="70" height="70" src="<%= map[desc1] %>" alt="sun--v1" id="" />
-							<h1 class="weather-temp">
-								<%=temp1%>°C
-							</h1>
-							<h3 class="weather-desc">
-								<%=desc1%>
-							</h3>
-						</div>
-					</div>
-				</div>
-				<div class="info-side">
-					<div class="today-info-container">
-						<div class="today-info">
-							<div class="precipitation">
-								<span class="title">PRESSURE</span>
-								<span class="value">
-									<%= press1 %> hpa
-								</span>
-								<div class="clear"></div>
-							</div>
-							<div class="humidity">
-								<span class="title">HUMIDITY</span>
-								<span class="value">
-									<%=humi1%>%
-								</span>
-								<div class="clear"></div>
-							</div>
-							<div class="wind">
-								<span class="title">WIND</span>
-								<span class="value">
-									<%= wind %> km/h
-								</span>
-								<div class="clear"></div>
-							</div>
-							<div class="visibility">
-								<span class="title">VISIBILITY</span>
-								<span class="value">
-									<%= visiable %> km
-								</span>
-								<div class="clear"></div>
-							</div>
+						<!-- <br>
+						<br> -->
+						<div class="swipe-button">
+							<button onclick="down()">
+
+
+								<i class="fa-solid fa-angle-down"></i>
+							</button>
 						</div>
 					</div>
-					<div class="week-container">
+					<div class="info-side">
+						<div class="today-info-container">
+							<div class="today-info">
+								<div class="precipitation">
+									<span class="title">PRESSURE</span>
+									<span class="value">
+										<%= press1 %> hpa
+									</span>
+									<div class="clear"></div>
+								</div>
+								<div class="humidity">
+									<span class="title">HUMIDITY</span>
+									<span class="value">
+										<%=humi1%>%
+									</span>
+									<div class="clear"></div>
+								</div>
+								<div class="wind">
+									<span class="title">WIND</span>
+									<span class="value">
+										<%= wind %> km/h
+									</span>
+									<div class="clear"></div>
+								</div>
+								<div class="visibility">
+									<span class="title">VISIBILITY</span>
+									<span class="value">
+										<%= visiable %> km
+									</span>
+									<div class="clear"></div>
+								</div>
+							</div>
+						</div>
+						<div class="week-container">
 
 
 
 
 
-						<span class="day-name"><img width="50" height="50"
-								src="https://img.icons8.com/ios-filled/50/FAB005/sun--v1.png" alt="sun--v1" />
-							<hr style="width: 70%;margin-top:0rem;margin-left:0.3rem; border-color: #597bd8;">
-							<p style="font-weight: bold;">sunrise</p>
-							<p>
-								<%= rise %>
-							</p>
+							<span class="day-name"><img width="50" height="50"
+									src="https://img.icons8.com/ios-filled/50/FAB005/sun--v1.png" alt="sun--v1" />
+								<hr style="width: 70%;margin-top:0rem;margin-left:0.3rem; border-color: #597bd8;">
+								<p style="font-weight: bold;">sunrise</p>
+								<p>
+									<%= rise %>
+								</p>
 
-						</span>
+							</span>
 
-						<div class="half-circle"></div>
+							<div class="half-circle"></div>
 
-						<span class="day-temp"><img width="50" height="50"
-								src="https://img.icons8.com/ios/50/FAB005/sun--v1.png" alt="sun--v1" />
-							<hr style="width: 70%;margin-top:0rem;margin-right:0.6rem; border-color: #597bd8;">
-							<p style="font-weight: bold;">sunset</p>
-							<p>
-								<%= set %>
-							</p>
-						</span>
+							<span class="day-temp"><img width="50" height="50"
+									src="https://img.icons8.com/ios/50/FAB005/sun--v1.png" alt="sun--v1" />
+								<hr style="width: 70%;margin-top:0rem;margin-right:0.6rem; border-color: #597bd8;">
+								<p style="font-weight: bold;">sunset</p>
+								<p>
+									<%= set %>
+								</p>
+							</span>
 
 
 
-						<!-- <li>
+							<!-- <li>
 						<i class="day-icon" data-feather="cloud"></i>
                         <span class="day-name">Wed</span>
                         <span class="day-temp">21°C</span>
@@ -471,21 +618,45 @@
 
 
 
-					</div>
+						</div>
 
-					<div class="location-container">
-						<button class="location-button" onclick="window.location.href='index.html'">
-							<i class="fa-solid fa-location-dot"></i>
-							<span>Change location</span>
-						</button>
+						<div class="location-container">
+							<button class="location-button" onclick="window.location.href='index.html'">
+								<i class="fa-solid fa-location-dot"></i>
+								<span>Change location</span>
+							</button>
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<script>
-				feather.replace()
-				
-			</script>
+				<script>
+					// feather.replace();
+
+
+					var count = 0;
+					function down() {
+
+						if (count == 0) {
+
+							document.querySelector(".info-side").style.visibility = "visible";
+							document.querySelector(".info-side").style.backgroundColor = "#222831";
+							document.querySelector(".info-side").style.borderTopRightRadius = "0px";
+							document.querySelector(".info-side").style.borderTopLeftRadius = "0px";
+
+
+							count++;
+						} else {
+							document.querySelector(".info-side").style.visibility = "hidden";
+							count = 0;
+
+						}
+
+
+					}
+
+
+
+				</script>
 
 </body>
 
