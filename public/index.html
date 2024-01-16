@@ -116,22 +116,23 @@
     </label>
 
     <br>
+<form method="post" action="/manual">
 
     <div class="manualSection remove" id="manualid">
         <label for="city">City:</label>
-        <input type="text" id="city" name="city" placeholder="Enter city">
-
-        <label for="state">State:</label>
-        <input type="text" id="state" name="state" placeholder="Enter state">
-
-    </div>
-    <div style="text-align: center;" class="geolocationSection" id="autobtn">
-        <p style="color: white; text-align: center;">Click here to get the Weather by geolocation</p>
-        <input type="submit" value="Get Location" class="button" onclick="getLoc()">
+        <input type="text" id="city" name="city" placeholder="Enter cityname">
+        
+        
+        
     </div>
     <div style="text-align: center;" class="geolocationSection2 remove" id="manualbtn">
         <p style="color: white; text-align: center;">Click here to get the Weather by manually</p>
-        <input type="submit" value="Get Location" class="button" onclick="getLocity()">
+        <input type="submit" value="Get Weather" class="button" onclick="getLocity()">
+    </div>
+</form>
+    <div style="text-align: center;" class="geolocationSection" id="autobtn">
+        <p style="color: white; text-align: center;">Click here to get the Weather by geolocation</p>
+        <input type="submit" value="Get Weather" class="button" onclick="getLoc()">
     </div>
 
 
