@@ -31,20 +31,20 @@ app.get("/loc", async (req, res) => {
 
   //{
   //all days at 0 , 2 , 10 , 18 , 26
-  
-//   const day1 = response.data.list[0];
-//   const day2 = response.data.list[2];
-//   const day3 = response.data.list[10];
-//   const day4 = response.data.list[3];
-  
-//   const cityname = response.data.city.name;
-//   const country = response.data.city.country;
 
-//   const temp1 = Math.round(day1.main.temp - 271.13);
-//   const pressure1 = day1.main.pressure;
-//   const humidity1 = day1.main.humidity;
-//   const desc1 = day1.weather[0].description;
-//  const wind = day1.wind.speed * 3.6;
+  //   const day1 = response.data.list[0];
+  //   const day2 = response.data.list[2];
+  //   const day3 = response.data.list[10];
+  //   const day4 = response.data.list[3];
+
+  //   const cityname = response.data.city.name;
+  //   const country = response.data.city.country;
+
+  //   const temp1 = Math.round(day1.main.temp - 271.13);
+  //   const pressure1 = day1.main.pressure;
+  //   const humidity1 = day1.main.humidity;
+  //   const desc1 = day1.weather[0].description;
+  //  const wind = day1.wind.speed * 3.6;
   //  }
 
   const temp = Math.round(response.data.main.temp - 271.13);
@@ -55,15 +55,15 @@ app.get("/loc", async (req, res) => {
   const wind = Math.round(response.data.wind.speed * 3.6);
   const country = response.data.sys.country;
   const name = response.data.name;
-  const sunset = new Date(response.data.sys.sunset * 1000);  
+  const sunset = new Date(response.data.sys.sunset * 1000);
   const sunrise = new Date(response.data.sys.sunrise * 1000);
   const icon = response.data.weather[0].icon;
   const lastChar = icon.charAt(icon.length - 1);
-  
+
   const set = sunset.toLocaleTimeString("en-US");
   const rise = sunrise.toLocaleTimeString("en-US");
-  
-  
+
+
   let date = new Date();
   let year = date.getFullYear();
   let month = date.getMonth() + 1;
@@ -79,9 +79,9 @@ app.get("/loc", async (req, res) => {
   if (day < 10) {
     day = '0' + day;
   }
-                                              
+
   let fullDate = `${day} ${month} ${year}`;
-                                  
+
   console.log(fullDate);
   console.log(rise);
   console.log(set);
@@ -95,9 +95,28 @@ app.get("/loc", async (req, res) => {
   //for ejs :- {temp1:temp1  , humi1:humidity1 , desc1:desc1 , press1:pressure1 , wind:wind }       
 
 
-  res.render("index.ejs", { Full: fullDate, week: week , city:name , coun:country , temp1:temp , humi1:humidity , desc1:desc , press1:pressure , wind:wind , visiable:visibility , set:set , rise:rise , last:lastChar  });
+  res.render("index.ejs", { Full: fullDate, week: week, city: name, coun: country, temp1: temp, humi1: humidity, desc1: desc, press1: pressure, wind: wind, visiable: visibility, set: set, rise: rise, last: lastChar });
 });
 
+
+app.post("/manual", async (req, res) => {
+  console.log(req.body);
+  const response = await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${req.body.city}&limit=1&appid=577a56ab41c4d905ee1fd19fcc68945b`);
+  if (response.data.length == 0) {
+    res.send("city not found plz enter locally known citys");
+
+  } else {
+    console.log(response.data[0].name);
+    console.log(response.data[0].lon);
+    console.log(response.data[0].lat);
+
+    lat = response.data[0].lat;
+    long = response.data[0].lon;
+    res.redirect("/loc");
+
+
+  }
+})
 
 app.listen(port, () => {
   console.log("app is listening on the port ", port);
