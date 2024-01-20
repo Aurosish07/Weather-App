@@ -1,9 +1,11 @@
 import express from "express"
 import axios from "axios"
 import bodyParser from "body-parser";
+import 'dotenv/config';
 
 const port = 3000;
 const app = express();
+const apikey = process.env.OPEN_AI_APIKEY;
 
 app.set('view engine', 'ejs');
 app.use(express.static("public"));
@@ -27,7 +29,7 @@ app.post("/loc", (req, res) => {
 
 
 app.get("/loc", async (req, res) => {
-  const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=577a56ab41c4d905ee1fd19fcc68945b`);
+  const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apikey}`);
 
   //{
   //all days at 0 , 2 , 10 , 18 , 26
