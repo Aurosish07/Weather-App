@@ -1,18 +1,16 @@
 {
-    "routes": [
-      {
-        "src": "/loc",
-        "dest": "/index.js"
-      },
-      {
-        "src": "/manual",
-        "dest": "/index.js"
-      }
-    ],
     "rewrites": [
       {
         "source": "/(.*)",
         "destination": "/public/$1"
+      },
+      {
+        "source": "/loc",
+        "destination": "/index.js"
+      },
+      {
+        "source": "/manual",
+        "destination": "/index.js"
       }
     ],
     "builds": [
