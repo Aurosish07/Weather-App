@@ -1,0 +1,25 @@
+{
+    "routes": [
+      {
+        "src": "/loc",
+        "dest": "/index.js"
+      },
+      {
+        "src": "/manual",
+        "dest": "/index.js"
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "/(.*)",
+        "destination": "/public/$1"
+      }
+    ],
+    "builds": [
+      {
+        "src": "index.js",
+        "use": "@vercel/node"
+      }
+    ]
+  }
+  
